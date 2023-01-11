@@ -43,13 +43,16 @@
     <Compile Include="DjangoWebProject\settings.py" />
     <Compile Include="DjangoWebProject\urls.py" />
     <Compile Include="DjangoWebProject\wsgi.py" />
-    <Compile Include="polls\admin.py" />
-    <Compile Include="polls\apps.py" />
-    <Compile Include="polls\migrations\__init__.py" />
-    <Compile Include="polls\models.py" />
-    <Compile Include="polls\tests.py" />
-    <Compile Include="polls\views.py" />
-    <Compile Include="polls\__init__.py" />
+    <Compile Include="holonet\admin.py" />
+    <Compile Include="holonet\apps.py" />
+    <Compile Include="holonet\migrations\__init__.py" />
+    <Compile Include="holonet\models.py" />
+    <Compile Include="holonet\tests.py" />
+    <Compile Include="holonet\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="holonet\views.py" />
+    <Compile Include="holonet\__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
@@ -62,8 +65,8 @@
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
     <Folder Include="DjangoWebProject\" />
-    <Folder Include="polls\" />
-    <Folder Include="polls\migrations\" />
+    <Folder Include="holonet\" />
+    <Folder Include="holonet\migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore">
@@ -99,11 +102,6 @@
     <Content Include="app\templates\app\layout.html" />
     <Content Include="app\templates\app\login.html" />
     <Content Include="app\templates\app\loginpartial.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="readme.html">
-      <SubType>WebBrowser</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="envirement\">
