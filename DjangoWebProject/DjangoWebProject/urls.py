@@ -12,10 +12,11 @@ from holonet import views as mainview
 
 urlpatterns = [
     path('', include("holonet.urls")),
-    # Default
+    # Template
     path('home/', views.home, name='home'),
     path('contact/', views.contact, name='contact'),
     path('about/', views.about, name='about'),
+    # Default
     path('login/',
          LoginView.as_view
          (

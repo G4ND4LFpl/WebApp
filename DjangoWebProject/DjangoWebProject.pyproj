@@ -70,11 +70,13 @@
     <Folder Include="DjangoWebProject\" />
     <Folder Include="holonet\" />
     <Folder Include="holonet\migrations\" />
+    <Folder Include="holonet\templates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="holonet\templates\index.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />
