@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -17,13 +17,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="{% url 'profile' %}">Profile</a></li>
+                    <li><a href="/profile?user={{user.username}}">Profile</a></li>
                 </ul>
                 {% if user.is_authenticated %}
                 <form id="logoutForm" action="/logout/" method="post" class="navbar-right">
                     {% csrf_token %}
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{% url 'profile' %}">{{ user.username }}</a></li>
+                        <li><a href="/profile?user={{user.username}}">{{ user.username }}</a></li>
                         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                     </ul>
                 </form>
