@@ -22,10 +22,14 @@ def profile(request):
         'year':datetime.now().year,
         }
     if request.user.is_authenticated:
-        username = request.GET['user']
-        userID = User.objects.get_by_natural_key(username)
-        Huser = HolonetUser.objects.get(id = userID.id)
-        post_list = Post.objects.filter(author=userID).order_by('-create_date')[:10]
+        if request.GET.get('user'):
+            username = request.GET['user']
+            userData = User.objects.get_by_natural_key(username)
+        else:
+            username=request.user.username
+            userData=request.user
+        Huser = HolonetUser.objects.get(id = userData.id)
+        post_list = Post.objects.filter(author=userData).order_by('-create_date')[:10]
         params.update({
             'title': username,
             'about' : Huser.about,
@@ -38,4 +42,12 @@ def profile(request):
             })
         return render(request, 'create_profile.html', params)
 
+def create_post(request):
+    assert isinstance(request, HttpRequest)
+    if request.method=='POST':
+        if request.POST.get('newpost'):
+            newpost_content = request.POST['newpost']
+            newpost = Post(author=request.user,content=newpost_content,create_date=datetime.now())
+            newpost.save()
+    return profile(request)
     

@@ -5,7 +5,7 @@
 <h1> {{ title }} </h1>
 <p> {{ about }} </p>
 {% if user.username == title %}
-    <p>Its your profile</p>
+    {% include 'postform.html' %}
 {% endif %}
 
 {% include 'postpage.html' %}
