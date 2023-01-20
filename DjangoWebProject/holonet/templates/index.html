@@ -1,13 +1,15 @@
-﻿{% extends "layout.html" %}
+{% extends "layout.html" %}
 
 {% block content %}
 
-<h1>Witaj na serwisie Holonet!</h1>
-<article>
-    <div>
-        <h3>Użytkownik 1</h3>
-        <p>To jest treść pierwszego posta</p>
-    </div>
-</article>
+{% for post in post_list %}
+<div class="row">
+    <h2>{{post.author}}</h2>
+     <p>
+         {{post.content}}
+     </p>
+     <p>{{post.create_date}}</p>
+</div>
+{% endfor %}
 
 {% endblock %}

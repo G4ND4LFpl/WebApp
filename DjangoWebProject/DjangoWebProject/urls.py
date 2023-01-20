@@ -7,17 +7,15 @@ from django.urls import include, path
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from app import forms, views # default
-from holonet import views as mainview
 
 
 urlpatterns = [
     path('', include("holonet.urls")),
-    # Template
+    # Default
     path('home/', views.home, name='home'),
     path('contact/', views.contact, name='contact'),
     path('about/', views.about, name='about'),
-    # Default
-    path('login/',
+    path('admin-login/',
          LoginView.as_view
          (
              template_name='app/login.html',
@@ -28,7 +26,7 @@ urlpatterns = [
                  'year' : datetime.now().year,
              }
          ),
-         name='login'),
-    path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
+         name='adminlogin'),
+    path('admin-logout/', LogoutView.as_view(next_page='/'), name='adminlogout'),
     path('admin/', admin.site.urls)
 ]

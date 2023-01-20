@@ -7,6 +7,9 @@ class User(models.Model):
     join_date = models.DateTimeField(default=datetime.now)
     password = models.CharField(max_length=60)
 
+    def __str__(self):
+        return self.user_name
+
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
