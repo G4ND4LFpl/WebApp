@@ -41,6 +41,9 @@
     <Compile Include="app\views.py" />
     <Compile Include="app\__init__.py" />
     <Compile Include="app\migrations\__init__.py" />
+    <Compile Include="holonet\forms.py" />
+    <Compile Include="holonet\migrations\0001_initial.py" />
+    <Compile Include="holonet\migrations\0002_auto_20230119_1404.py" />
     <Compile Include="manage.py" />
     <Compile Include="DjangoWebProject\__init__.py" />
     <Compile Include="DjangoWebProject\settings.py" />
@@ -70,11 +73,21 @@
     <Folder Include="DjangoWebProject\" />
     <Folder Include="holonet\" />
     <Folder Include="holonet\migrations\" />
+    <Folder Include="holonet\static\" />
+    <Folder Include="holonet\static\css\" />
+    <Folder Include="holonet\static\js\" />
+    <Folder Include="holonet\templates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="holonet\static\css\bootstrap.min.css" />
+    <Content Include="holonet\static\css\site.css" />
+    <Content Include="holonet\static\js\jquery.validate.min.js" />
+    <Content Include="holonet\templates\index.html" />
+    <Content Include="holonet\templates\layout.html" />
+    <Content Include="holonet\templates\login.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />

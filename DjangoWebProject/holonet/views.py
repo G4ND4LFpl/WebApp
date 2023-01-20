@@ -1,7 +1,16 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from datetime import datetime
+from django.http import HttpRequest
+from .models import Post
 
 # Create your views here.
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the Holonet page.")
+    assert isinstance(request, HttpRequest)
+    post_list = Post.objects.order_by('-create_date')[:10]
+    params = {
+        'title':'Holonet',
+        'year':datetime.now().year,
+        'post_list':post_list
+        }
+    return render(request,'index.html',params)
