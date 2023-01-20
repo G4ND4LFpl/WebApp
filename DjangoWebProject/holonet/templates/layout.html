@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
+    <title>Holonet - {{ title }}</title>
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}" />
@@ -13,19 +13,17 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a href="/" class="navbar-brand">{{ title }}</a>
+                <a href="/" class="navbar-brand">Holonet</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="{% url 'about' %}">About</a></li>
-                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                    <li><a href="{% url 'profile' %}">Profile</a></li>
                 </ul>
                 {% if user.is_authenticated %}
                 <form id="logoutForm" action="/logout/" method="post" class="navbar-right">
                     {% csrf_token %}
                     <ul class="nav navbar-nav navbar-right">
-                        <li><span class="navbar-brand">{{ user.username }}</span></li>
+                        <li><a href="{% url 'profile' %}">{{ user.username }}</a></li>
                         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                     </ul>
                 </form>

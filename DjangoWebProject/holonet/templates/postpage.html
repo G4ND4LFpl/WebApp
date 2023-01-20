@@ -1,0 +1,9 @@
+{% for post in post_list %}
+<div class="row">
+    <a href="/profile?user={{post.author}}"><h2>{{post.author}}</h2></a>
+     <p>
+         {{post.content}}
+     </p>
+     <p>{{post.create_date}}</p>
+</div>
+{% endfor %}

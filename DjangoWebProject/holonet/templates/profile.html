@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1> {{ username }} </h1>
+{% if user.username == username %}
+<p>Its your profile</p>
+{% endif %}
+
+{% include 'postpage.html' %}
+
+{% endblock %}

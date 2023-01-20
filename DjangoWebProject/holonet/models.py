@@ -8,7 +8,6 @@ class HolonetUser(models.Model):
     about = models.TextField()
 
 class Post(models.Model):
-    author = models.ForeignKey(HolonetUser, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     create_date = models.DateTimeField(default=datetime.now)
-    likes = models.IntegerField(default=0)
