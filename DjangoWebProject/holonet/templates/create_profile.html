@@ -6,16 +6,16 @@
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
-            <form action="/sing-in/" method="post" class="form-horizontal">
+            <form action="{% url 'add_user' %}" method="post" class="form-horizontal">
                 {% csrf_token %}
                 <p>Make new profile</p>
                 
                 <h4>Username</h4>
-                <input class="form-control" type="text" name="username" rows="1">
+                <input class="form-control" type="text" name="username" rows="1" required>
                 <h4>Password</h4>
-                <input class="form-control" type="password" name="password" rows="1">
+                <input class="form-control" type="password" name="password" rows="1" required>
                 <h4>Repeat password</h4>
-                <input class="form-control" type="password" name="password2" rows="1">
+                <input class="form-control" type="password" name="password2" rows="1" required>
                 <h4>About you</h4>
                 <input class="form-control" type="text" name="about" rows="3">
                 <br/>

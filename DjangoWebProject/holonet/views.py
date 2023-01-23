@@ -30,10 +30,7 @@ def profile(request):
         username=request.user.username
         userData=request.user
     else:
-        params.update({
-            'title': 'Sing in',
-            })
-        return render(request, 'create_profile.html', params)
+        return HttpResponseRedirect("/login/")
     Huser = HolonetUser.objects.get(user = userData)
     post_list = Post.objects.filter(author=userData).order_by('-create_date')[:10]
     params.update({
@@ -53,6 +50,13 @@ def create_post(request):
     return profile(request)
 
 def sing_in(request):
+    params = {            
+        'year':datetime.now().year,
+        'title': 'Sing in',
+        }
+    return render(request, 'create_profile.html', params)
+
+def add_user(request):
     assert isinstance(request, HttpRequest)
     if request.method=='POST':
         if check_form_in_request(request):
@@ -66,7 +70,7 @@ def sing_in(request):
             holonet_user = HolonetUser(user = user, about = post['about'])
             holonet_user.save()
             return index(request)
-    return profile(request)
+    return HttpResponseRedirect("/login/")
 
 def check_form_in_request(request):
     if not request.POST.get('username'): return False
