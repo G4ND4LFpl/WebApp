@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class HolonetUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User,primary_key=True, on_delete=models.CASCADE)
     about = models.TextField()
 
 class Post(models.Model):

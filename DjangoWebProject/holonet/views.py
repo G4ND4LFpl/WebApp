@@ -28,9 +28,9 @@ def profile(request):
             username = request.GET['user']
             userData = User.objects.get_by_natural_key(username)
         else:
-            username = request.user.username
-            userData = request.user
-        Huser = HolonetUser.objects.get(id = userData.id)
+            username=request.user.username
+            userData=request.user
+        Huser = HolonetUser.objects.get(user = userData)
         post_list = Post.objects.filter(author=userData).order_by('-create_date')[:10]
         params.update({
             'title': username,
