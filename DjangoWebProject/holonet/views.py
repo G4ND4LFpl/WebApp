@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from datetime import datetime
 from random import randint
-from django.http import HttpRequest
+from django.http import HttpRequest,HttpResponseRedirect
 from .models import Post, HolonetUser
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import PBKDF2PasswordHasher as Hasher
@@ -23,26 +23,25 @@ def profile(request):
     params = {            
         'year':datetime.now().year,
         }
-    if request.user.is_authenticated:
-        if request.GET.get('user'):
-            username = request.GET['user']
-            userData = User.objects.get_by_natural_key(username)
-        else:
-            username=request.user.username
-            userData=request.user
-        Huser = HolonetUser.objects.get(user = userData)
-        post_list = Post.objects.filter(author=userData).order_by('-create_date')[:10]
-        params.update({
-            'title': username,
-            'about' : Huser.about,
-            'post_list': post_list,
-            })
-        return render(request,'profile.html',params)
+    if request.GET.get('user'):
+        username = request.GET['user']
+        userData = User.objects.get_by_natural_key(username)
+    elif request.user.is_authenticated:
+        username=request.user.username
+        userData=request.user
     else:
         params.update({
             'title': 'Sing in',
             })
         return render(request, 'create_profile.html', params)
+    Huser = HolonetUser.objects.get(user = userData)
+    post_list = Post.objects.filter(author=userData).order_by('-create_date')[:10]
+    params.update({
+        'title': username,
+        'about' : Huser.about,
+        'post_list': post_list,
+        })
+    return render(request,'profile.html',params)
 
 def create_post(request):
     assert isinstance(request, HttpRequest)
