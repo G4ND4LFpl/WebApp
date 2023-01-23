@@ -6,6 +6,7 @@ from . import views,forms
 urlpatterns = [
     path('', views.index, name='index'),
     path('create-post/', views.create_post, name='create_post'),
+    path('create-comment/', views.create_comment, name='create_comment'),
     path('profile/', views.profile, name='profile'),
     path('sing-in/', views.sing_in, name='sing_in'),
     path('add-user/', views.add_user, name='add_user'),

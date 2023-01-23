@@ -2,7 +2,7 @@ from django.shortcuts import render
 from datetime import datetime
 from random import randint
 from django.http import HttpRequest,HttpResponseRedirect
-from .models import Post, HolonetUser
+from .models import Post,Comment, HolonetUser
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import PBKDF2PasswordHasher as Hasher
 
@@ -11,10 +11,15 @@ from django.contrib.auth.hashers import PBKDF2PasswordHasher as Hasher
 def index(request):
     assert isinstance(request, HttpRequest)
     post_list = Post.objects.order_by('-create_date')[:10]
+    comment_dict={}
+    for post in post_list:
+        comment_list=Comment.objects.filter(post=post).order_by('-create_date')[:5]
+        comment_dict.update({post:comment_list})
     params = {
         'title':'Home',
         'year':datetime.now().year,
-        'post_list':post_list
+        'post_list':post_list,
+        'comment_dict':comment_dict,
         }
     return render(request,'index.html',params)
 
@@ -33,10 +38,15 @@ def profile(request):
         return HttpResponseRedirect("/login/")
     Huser = HolonetUser.objects.get(user = userData)
     post_list = Post.objects.filter(author=userData).order_by('-create_date')[:10]
+    comment_dict={}
+    for post in post_list:
+        comment_list=Comment.objects.filter(post=post).order_by('-create_date')[:5]
+        comment_dict.update({post:comment_list})
     params.update({
         'title': username,
         'about' : Huser.about,
-        'post_list': post_list,
+        'post_list':post_list,
+        'comment_dict':comment_dict,
         })
     return render(request,'profile.html',params)
 
@@ -47,7 +57,18 @@ def create_post(request):
             newpost_content = request.POST['newpost']
             newpost = Post(author=request.user,content=newpost_content,create_date=datetime.now())
             newpost.save()
-    return profile(request)
+    return HttpResponseRedirect("/profile/")
+
+def create_comment(request):
+    assert isinstance(request, HttpRequest)
+    if request.method=='POST':
+        if request.POST.get('newcomment'):
+            newcomment_content = request.POST['newcomment']
+            post_id = request.POST['post']
+            print(post_id)
+            newcomment = Comment(author=request.user,post=Post.objects.get(id=post_id),content=newcomment_content,create_date=datetime.now())
+            newcomment.save()
+    return HttpResponseRedirect("/")
 
 def sing_in(request):
     params = {            

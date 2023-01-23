@@ -1,9 +1,29 @@
+{% load tags %}
 {% for post in post_list %}
 <div class="row">
     <a href="/profile?user={{post.author}}"><h2>{{post.author}}</h2></a>
-     <p>
+    <p>
          {{post.content}}
-     </p>
-     <p>{{post.create_date}}</p>
+    </p>
+    <p>{{post.create_date}}</p>
+    <div class="row">
+        <form action="/create-comment/" method="post">
+        <div class="form-group">
+            {% csrf_token %}
+            <textarea class="form-control" name="newcomment" rows="3"></textarea>
+            <input type="hidden" name="post" value="{{post.id}}">
+            <button class="btn btn-primary" type="submit">Add comment</button>
+        </div>
+        </form>
+    </div>
+    {% for comment in comment_dict|hash:post %}
+    <div class="row">
+    <a href="/profile?user={{comment.author}}"><h4>{{comment.author}}</h4></a>
+    <p>
+        {{comment.content}}
+    </p>
+    <p>{{comment.create_date}}</p>
+    </div>
+    {% endfor %}
 </div>
 {% endfor %}
