@@ -6,6 +6,7 @@
          {{post.content}}
     </p>
     <p>{{post.create_date}}</p>
+    {% if user.is_authenticated %}
     <div class="row">
         <form action="/create-comment/" method="post">
         <div class="form-group">
@@ -16,6 +17,7 @@
         </div>
         </form>
     </div>
+    {% endif %}
     {% for comment in comment_dict|hash:post %}
     <div class="row">
     <a href="/profile?user={{comment.author}}"><h4>{{comment.author}}</h4></a>
